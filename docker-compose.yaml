@@ -5,13 +5,13 @@ networks:
 services:
   # docker run -d --name mongodb --network=roboshop mongodb:v1
   mongodb:
-    image: mongodb:v1
+    image: joindevops/mongodb:v1
     container_name: mongodb
     # networks:
     # - roboshop
 
   catalogue:
-    image: catalogue:v1
+    image: joindevops/catalogue:v1
     container_name: catalogue
     # networks:
     # - roboshop
@@ -19,7 +19,7 @@ services:
     - mongodb
 
   web:
-    image: web:v1
+    image: joindevops/web:v1
     container_name: web
     ports:
     - "80:80"
@@ -35,25 +35,25 @@ services:
     container_name: redis
 
   user:
-    image: user:v1
+    image: joindevops/user:v1
     container_name: user
     depends_on:
     - redis
     - mongodb
 
   cart:
-    image: cart:v1
+    image: joindevops/cart:v1
     container_name: cart
     depends_on:
     - redis
     - catalogue
 
   mysql:
-    image: mysql:v1
+    image: joindevops/mysql:v1
     container_name: mysql
 
   shipping:
-    image: shipping:v1
+    image: joindevops/shipping:v1
     container_name: shipping
     depends_on:
     - mysql
@@ -67,7 +67,7 @@ services:
 
   payment:
     container_name: payment
-    image: payment:v1
+    image: joindevops/payment:v1
     depends_on:
     - rabbitmq
     - user
